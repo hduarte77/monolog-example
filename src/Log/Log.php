@@ -1,29 +1,31 @@
 <?php
 
-namespace Beto\Log;
+namespace Beto;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\LineFormatter;
 
-class Log {
+class Log
+{
 
     private $log;
 
 
-    public function __construct($logname, $logfile = null){
+    public function __construct($logname, $logfile = null)
+    {
 
         $this->log = new Logger($logname);
 
-        //define de line format for logs
+        //define a line format for logs
         $output = "[%datetime%] [%channel%] [%level_name%] %message% %context%\n";
         $dateFormat = "Y-m-d H:i:s";
-        
+
         // finally, create a formatter
         $formatter = new LineFormatter($output, $dateFormat);
 
-        //if there is a logfile, log info, erro and debug messages
-        if($logfile){
+        //if there is a logfile all messages
+        if ($logfile) {
 
             $file_stream = new StreamHandler($logfile, Logger::DEBUG);
             $file_stream->setFormatter($formatter);
@@ -39,35 +41,40 @@ class Log {
 
     }
 
-    public function info($str,$data = []){
+    public function info($str, $data = [])
+    {
 
-        $this->log->info($str,$data);
-
-    }
-
-    public function error($str,$data = []){
-
-        $this->log->error($str,$data);
+        $this->log->info($str, $data);
 
     }
 
+    public function error($str, $data = [])
+    {
 
-    public function debug($str,$data = []){
-
-        $this->log->debug($str,$data);
-
-    }
-
-    public function warning($str,$data = []){
-
-        $this->log->warning($str,$data);
+        $this->log->error($str, $data);
 
     }
 
 
-    public function critical($str,$data = []){
+    public function debug($str, $data = [])
+    {
 
-        $this->log->critical($str,$data);
+        $this->log->debug($str, $data);
+
+    }
+
+    public function warning($str, $data = [])
+    {
+
+        $this->log->warning($str, $data);
+
+    }
+
+
+    public function critical($str, $data = [])
+    {
+
+        $this->log->critical($str, $data);
 
     }
 
