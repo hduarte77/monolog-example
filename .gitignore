@@ -1,3 +1,4 @@
 /vendor/
 /app.log
 /composer.lock
+/logs
